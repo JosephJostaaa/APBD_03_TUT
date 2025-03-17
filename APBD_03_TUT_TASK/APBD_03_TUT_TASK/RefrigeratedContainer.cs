@@ -13,6 +13,12 @@ public class RefrigeratedContainer : Container
         ProductTemperature.Add("Chocolate", 18);
         ProductTemperature.Add("Fish", 2);
         ProductTemperature.Add("Meat", -15);
+        ProductTemperature.Add("Ice cream", -18);
+        ProductTemperature.Add("Frozen pizza", -30);
+        ProductTemperature.Add("Cheese", 7.2);
+        ProductTemperature.Add("Sausages", 5);
+        ProductTemperature.Add("Butter", 20.5);
+        ProductTemperature.Add("Eggs", 19);
 
 
         if (!ProductTemperature.ContainsKey(typeOfProduct))
