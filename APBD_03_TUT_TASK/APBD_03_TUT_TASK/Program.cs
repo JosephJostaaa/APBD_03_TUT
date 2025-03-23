@@ -29,7 +29,7 @@ ship.ReplaceContainer(refContainer.SerialNumber, gasContainer);
 
 ship.TransferContainer(gasContainer.SerialNumber, ship2);
 
-Console.WriteLine(ship);
+Console.WriteLine(ship2);
 Console.WriteLine(gasContainer);
 
 

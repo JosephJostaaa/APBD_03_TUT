@@ -102,6 +102,17 @@ public class Ship
     public override string ToString()
     {
         return
-            "Ship info: "+$"{nameof(_totalWeight)}: {_totalWeight}, {nameof(Containers)}: {Containers}, {nameof(MaxSpeed)}: {MaxSpeed}, {nameof(MaxNumberOfContainers)}: {MaxNumberOfContainers}, {nameof(MaxWeightOfContainers)}: {MaxWeightOfContainers}";
+            "Ship info: "+$"{nameof(_totalWeight)}: {_totalWeight}, {nameof(Containers)}: {GetCargoInfo()}, {nameof(MaxSpeed)}: {MaxSpeed}, {nameof(MaxNumberOfContainers)}: {MaxNumberOfContainers}, {nameof(MaxWeightOfContainers)}: {MaxWeightOfContainers}";
+    }
+
+    private string GetCargoInfo()
+    {
+        string result = "{";
+        foreach (var container in Containers)
+        {
+            result += container+ "\n";
+        }
+        result += "}";
+        return result;
     }
 }
