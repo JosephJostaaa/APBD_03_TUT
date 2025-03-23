@@ -3,16 +3,16 @@
 public class LiquidContainer : Container, IHazardNotifier
 {
     public bool IsHazardous { get; }
-    public LiquidContainer(double mass, double height, double tareWeight, double depth, bool isHazardous) : base(mass, height, tareWeight, depth)
+    public LiquidContainer(double height, double tareWeight, double depth, bool isHazardous, double maxPayload) : base(height, tareWeight, depth, maxPayload)
     {
-        SerialNumber = "KON-LiquidContainer-"+ID;
+        SerialNumber = "KON-LiquidContainer-"+LocalId;
         IsHazardous = isHazardous;
     }
 
 
     public void sendNotification()
     {
-        Console.WriteLine("Hazardous");
+        Console.WriteLine("The container " + SerialNumber + " is in a hazardous situation");
     }
 
     public override void LoadContainer(double mass)
@@ -33,5 +33,10 @@ public class LiquidContainer : Container, IHazardNotifier
                 sendNotification();
             }
         }
+    }
+
+    public override string ToString()
+    {
+        return $"{base.ToString()}, {nameof(IsHazardous)}: {IsHazardous}";
     }
 }

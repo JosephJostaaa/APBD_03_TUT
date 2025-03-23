@@ -2,7 +2,8 @@
 
 public abstract class Container
 {
-    public static int ID { get; } = 1;
+    private static int Id { get; set; } = 1;
+    public int LocalId { get; set; }
 
     public double CargoMass
     {
@@ -15,20 +16,20 @@ public abstract class Container
     public string SerialNumber { set; get;}
     public double MaxPayload { get; set; }
 
-    public Container(double mass, double height, double tareWeight, double depth)
+    public Container( double height, double tareWeight, double depth, double maxPayload)
     {
-        CargoMass = mass;
         Height = height;
         TareWeight = tareWeight;
         Depth = depth;
-
+        MaxPayload = maxPayload;
+        LocalId = Id++;
     }
 
     public virtual void LoadContainer(double mass)
     {
         if (mass > MaxPayload)
         {
-            throw new Exception();
+            throw new OverfillException("The amount of payload to be loaded is greater than the max payload.");
         }
         CargoMass = mass;
         
@@ -37,6 +38,12 @@ public abstract class Container
     public virtual void EmptyContainer()
     {
         CargoMass = 0;
+        Console.WriteLine("The container's " + SerialNumber+" was unloaded.");
     }
-    
+
+    public override string ToString()
+    {
+        return
+            "Container info: " + $"{nameof(CargoMass)}: {CargoMass}, {nameof(Height)}: {Height}, {nameof(TareWeight)}: {TareWeight}, {nameof(Depth)}: {Depth}, {nameof(SerialNumber)}: {SerialNumber}, {nameof(MaxPayload)}: {MaxPayload}";
+    }
 }

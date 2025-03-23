@@ -6,8 +6,9 @@ public class RefrigeratedContainer : Container
     public string TypeOfProduct { get; set; }
     public double Temperature { get; set; }
     public Dictionary<string, double> ProductTemperature { get; }
-    public RefrigeratedContainer(double mass, double height, double tareWeight, double depth, string typeOfProduct, double temperature) : base(mass, height, tareWeight, depth)
+    public RefrigeratedContainer(double height, double tareWeight, double depth, string typeOfProduct, double temperature, double maxPayload) : base(height, tareWeight, depth, maxPayload)
     {
+        SerialNumber = "KON-RefrigeratedContainer-"+LocalId;
         ProductTemperature = new Dictionary<string, double>();
         ProductTemperature.Add("Bananas", 13.3);
         ProductTemperature.Add("Chocolate", 18);
@@ -25,7 +26,7 @@ public class RefrigeratedContainer : Container
         {
             throw new Exception($"The type of {typeOfProduct} does not exist.");
         }
-        if (temperature < ProductTemperature[typeOfProduct])
+        if (temperature > ProductTemperature[typeOfProduct])
         {
             throw new Exception();
         }
@@ -33,6 +34,10 @@ public class RefrigeratedContainer : Container
         TypeOfProduct = typeOfProduct;
         Temperature = temperature;
     }
-    
-    
+
+    public override string ToString()
+    {
+        return
+            $"{base.ToString()}, {nameof(TypeOfProduct)}: {TypeOfProduct}, {nameof(Temperature)}: {Temperature}, {nameof(ProductTemperature)}: {ProductTemperature}";
+    }
 }
